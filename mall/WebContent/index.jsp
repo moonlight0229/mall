@@ -14,10 +14,9 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
-<!-- 2번째 개발환경에서 작성한 주석 -->
 <%
 	request.setCharacterEncoding("UTF-8");
-
+	int categoryId = -1;
 	// 카테고리
 	CategoryDao categoryDao = new CategoryDao();
 	// 상품
@@ -25,73 +24,27 @@
 	// 공지사항
 	NoticeDao noticeDao = new NoticeDao();
 	// 회원
-	MemberDao mamberDao = new MemberDao();
+	MemberDao memberDao = new MemberDao();
 	// 전체 카테고리 이름 리스트
 	ArrayList<Category> categoryList1 = categoryDao.selectCategoryList();
 	// 추천 카테고리 이미지 리스트
 	ArrayList<Category> categoryList2 = categoryDao.selectCategoryCkList();
 	// 상품 리스트
-	ArrayList<Product> productList = productDao.selectProductList();
+	ArrayList<Product> productList = null;
 	// 공지사항 리스트
-	ArrayList<Notice> noticeList = noticeDao.selectNoticeList();
+	ArrayList<Notice> noticeList = noticeDao.selectMainPageNoticeList();
+	if(categoryId == -1) {
+		productList = productDao.selectMainPageProductList();
+	} else {
+		productList = productDao.selectMainPageProductListByCategoryId(categoryId);
+	}
 %>
 <body>
 <div class="container">
-	<!-- 최상단 검색바 4/4/4 -->
-	<div class="row">
-		<div class="col-sm-4 d-flex justify-content-start">
-			<h1>
-				<a style="text-decoration: none; color: black;" href="<%=request.getContextPath()%>/index.jsp">Goodee Shop</a>
-			</h1>
-		</div>
-		<div class="col-sm-4 d-flex justify-content-center">
-			<input type="text" class="form-control" placeholder="Search" style="width: 300px">
-			<button type="submit" class="btn btn-secondary">검색</button>
-		</div>
-		<div class="col-sm-4 d-flex justify-content-end">
-			<i class='fas fa-user-alt' style='font-size: 30px'></i>
-			<i class='fas fa-shopping-cart' style='font-size: 30px'></i>
-		</div>
-	</div>
-	
-	<!-- 로그인/회원가입 메뉴바 -->
 	<div>
-		<nav class="navbar navbar-expand-sm bg-dark navbar-dark d-flex justify-content-end">
-			<%
-				if(session.getAttribute("loginMemberEmail") == null) {
-			%>
-					<!-- 로그아웃 상태 -->
-					<div class="d-flex justify-content-end">
-						<ul class="navbar-nav d-flex justify-content-end">
-							<li class="nav-item">
-								<a class="nav-link" href="<%=request.getContextPath()%>/member/login.jsp">로그인</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="<%=request.getContextPath()%>/member/signup.jsp">회원가입</a>
-							</li>
-						</ul>
-					</div>
-			<%
-				} else {
-			%>
-					<!-- 로그인 상태 -->
-					<ul class="navbar-nav">
-						<li class="nav-item">
-							<%=session.getAttribute("loginMemberEmail")%>님 반갑습니다
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="<%=request.getContextPath()%>/member/">내정보</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="<%=request.getContextPath()%>/member/logoutAction.jsp">로그아웃</a>
-						</li>
-						</ul>
-			<%
-				}
-			%>
-		</nav>
+		<jsp:include page="/inc/menu.jsp"></jsp:include>
 	</div>
-		
+			
 	<!-- 전체카테고리3 / 이미지 배너9 -->
 	<div class="row">
 		<table>
@@ -101,7 +54,7 @@
 					<%
 						for(Category c : categoryList1) {
 					%>
-							<a href="" class="btn btn-secondary"><%=c.getCategoryName()%></a>
+							<a href="<%=request.getContextPath()%>/product/productList.jsp?categoryId=<%=c.getCategoryId()%>" class="btn btn-secondary"><%=c.getCategoryName()%></a>
 					<%		
 						}
 					%>
@@ -129,18 +82,21 @@
 	<%
 		Calendar today = Calendar.getInstance();
 	%>
-	<!-- 카테고리별 추천 상품 -->
+	<!-- 카테고리별 추천 상품 출력 -->
 	<div>
 		<h4>
 			오늘의 추천상품
 			<span class="badge badge-pill badge-primary"><%=today.get(Calendar.YEAR)%>.<%=today.get(Calendar.MONTH)+1%>.<%=today.get(Calendar.DAY_OF_MONTH)%>
 			</span>
 		</h4>
-		<div>
+		<div class="btn-group" role="group">
+			<a class="btn btn-light" href="<%=request.getContextPath()%>/index.jsp">전체</a>
 			<%
 				for(Category c : categoryList1) {
 			%>
-					<a href="" class="btn"><%=c.getCategoryName()%></a>
+					<a class="btn btn-light" href="<%=request.getContextPath()%>/index.jsp?categoryId=<%=c.getCategoryId()%>">
+						<%=c.getCategoryName()%>
+					</a>
 			<%
 				}
 			%>

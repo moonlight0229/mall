@@ -3,7 +3,7 @@ package vo;
 public class Notice {
 	private int noticeId;
 	private String noticeTitle;
-	private String noticecontent;
+	private String noticeContent;
 	private String noticeDate;
 	
 	public int getNoticeId() {
@@ -18,11 +18,11 @@ public class Notice {
 	public void setNoticeTitle(String noticeTitle) {
 		this.noticeTitle = noticeTitle;
 	}
-	public String getNoticecontent() {
-		return noticecontent;
+	public String getNoticeContent() {
+		return noticeContent;
 	}
-	public void setNoticecontent(String noticecontent) {
-		this.noticecontent = noticecontent;
+	public void setNoticeContent(String noticeContent) {
+		this.noticeContent = noticeContent;
 	}
 	public String getNoticeDate() {
 		return noticeDate;
