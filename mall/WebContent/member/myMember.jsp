@@ -22,8 +22,6 @@
 	request.setCharacterEncoding("UTF-8");
 
 	String memberEmail = request.getParameter("memberEmail");
-	MemberDao memberDao = new MemberDao();
-	ArrayList<Member> memberList = memberDao.selectMemberList(memberEmail);
 	OrdersDao ordersDao = new OrdersDao();
 	ArrayList<OrdersAndProduct> ordersList = ordersDao.selectOrdersListByEmail(memberEmail);
 %>
@@ -32,9 +30,9 @@
 		<jsp:include page="/inc/menu.jsp"></jsp:include>
 	</div>
 	
- 	<h1 class="display-4">내 정보</h1>
+ 	<h1 class="display-4">내 주문내역</h1>
  	
- 	<a class="btn btn-danger" href="<%=request.getContextPath()%>/member/deleteMember.jsp?memberEmail=<%=session.getAttribute("loginMemberEmail%>">
+ 	<a class="btn btn-danger" href='<%=request.getContextPath()%>/member/deleteMember.jsp?memberEmail=<%=session.getAttribute("loginMemberEmail")%>'>
  		회원탈퇴
  	</a>
 
@@ -50,7 +48,6 @@
 				<th>배송지</th>
 				<th>주문상태</th>
 				<th>주문일시</th>
-				<th>주문관리</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -67,7 +64,6 @@
 						<td><%=oap.orders.getOrdersAddr()%></td>
 						<td><%=oap.orders.getOrdersState()%></td>
 						<td><%=oap.orders.getOrdersDate()%></td>
-						<td><a class="btn btn-light" href="<%=request.getContextPath()%>/orders/modifyOrdersState.jsp?ordersId=<%=oap.orders.getOrdersId()%>">관리</a></td>
 					</tr>
 			<%
 				}

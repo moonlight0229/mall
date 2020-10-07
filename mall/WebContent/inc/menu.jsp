@@ -9,8 +9,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <%
 	request.setCharacterEncoding("UTF-8");
-	MemberDao memberDao = new MemberDao();
-	ArrayList<Member> memberList = memberDao.selectMemberList();
 %>
 <!-- member_menu -->
 <!-- 최상단 검색바 4/4/4 -->

@@ -6,7 +6,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>mamberProductList</title>
+	<title>member_productList</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -36,6 +36,7 @@
 	<div>
 		<jsp:include page="/inc/menu.jsp"></jsp:include>
 	</div>
+	
 	<h1 class="display-4">상품 목록</h1>
     
     <!-- 상품을 카테고리 별로 출력하기 -->
@@ -55,8 +56,6 @@
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th>상품ID</th>
-				<th>카테고리ID</th>
 				<th>상품명</th>
 				<th>상품가격</th>
 				<th>상품 품절여부</th>
@@ -71,12 +70,10 @@
 							<td>
 								<del>
 									<a class="btn btn-light" href="<%=request.getContextPath()%>/product/productOne.jsp?productId=<%=product.getProductId()%>">
-										<%=product.getProductId()%>
+										<%=product.getProductName()%>
 									</a>
 								</del>
 							</td>
-							<td><del><%=product.getCategoryId()%></del></td>
-							<td><del><%=product.getProductName()%></del></td>
 							<td><del><%=product.getProductPrice()%>원</del></td>
 							<td><del>품절</del></td>
 						</tr>
@@ -86,11 +83,9 @@
 						<tr>
 							<td>
 								<a class="btn btn-light" href="<%=request.getContextPath()%>/product/productOne.jsp?productId=<%=product.getProductId()%>">
-									<%=product.getProductId()%>
+									<%=product.getProductName()%>
 								</a>
 							</td>
-							<td><%=product.getCategoryId()%></td>
-							<td><%=product.getProductName()%></td>
 							<td><%=product.getProductPrice()%>원</td>
 							<td>판매중</td>
 						</tr>

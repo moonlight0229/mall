@@ -20,28 +20,12 @@
 	Product product = productDao.selectProductOne(productId);
 %>
 <div class="container">
+	<div>
+		<jsp:include page="/inc/menu.jsp"></jsp:include>
+	</div>
+
 	<h1>상품 상세보기</h1>
-	<form method="post" action="<%=request.getContextPath()%>/orders/addOrdersAction.jsp">
-		<input type="hidden" value="<%=product.getProductId()%>" name="productId">
-		<input type="hidden" value="<%=product.getProductPrice()%>" name="productPrice">
-		<div>
-			주문수량 : 
-			<select name="ordersAmount">
-				<%
-					for(int i=1; i<11; i+=1) {
-				%>
-						<option value="<%=i%>"><%=i%></option>
-				<%		
-					}
-				%>
-			</select>개
-		</div>
-		<div>
-			배송지 : 
-			<input type="text" name="ordersAddr">
-		</div>
-		<div><button type="submit">주문</button></div>
-	</form>
+	
 	<table class="table">
 		<tr>
 			<td><img src="/mall/images/<%=product.getProductPic()%>" class="rounded"></td>
@@ -63,6 +47,28 @@
 			<td><%=product.getProductSoldout()%></td>
 		</tr>
 	</table>
+	
+	<form method="post" action="<%=request.getContextPath()%>/orders/addOrdersAction.jsp">
+		<input type="hidden" value="<%=product.getProductId()%>" name="productId">
+		<input type="hidden" value="<%=product.getProductPrice()%>" name="productPrice">
+		<div>
+			주문수량 : 
+			<select name="ordersAmount">
+				<%
+					for(int i=1; i<11; i+=1) {
+				%>
+						<option value="<%=i%>"><%=i%></option>
+				<%		
+					}
+				%>
+			</select>개
+		</div>
+		<div>
+			배송지 : 
+			<input type="text" name="ordersAddr">
+		</div>
+		<div><button type="submit" class="btn btn-sucess">주문</button></div>
+	</form>
 </div>
 </body>
 </html>

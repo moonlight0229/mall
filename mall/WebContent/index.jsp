@@ -16,15 +16,12 @@
 </head>
 <%
 	request.setCharacterEncoding("UTF-8");
-	int categoryId = -1;
 	// 카테고리
 	CategoryDao categoryDao = new CategoryDao();
 	// 상품
 	ProductDao productDao = new ProductDao();
 	// 공지사항
 	NoticeDao noticeDao = new NoticeDao();
-	// 회원
-	MemberDao memberDao = new MemberDao();
 	// 전체 카테고리 이름 리스트
 	ArrayList<Category> categoryList1 = categoryDao.selectCategoryList();
 	// 추천 카테고리 이미지 리스트
@@ -33,6 +30,11 @@
 	ArrayList<Product> productList = null;
 	// 공지사항 리스트
 	ArrayList<Notice> noticeList = noticeDao.selectMainPageNoticeList();
+	// 
+	int categoryId = -1;
+	if(request.getParameter("categoryId") != null) {
+		categoryId = Integer.parseInt(request.getParameter("categoryId"));
+	}
 	if(categoryId == -1) {
 		productList = productDao.selectMainPageProductList();
 	} else {
@@ -47,7 +49,7 @@
 			
 	<!-- 전체카테고리3 / 이미지 배너9 -->
 	<div class="row">
-		<table>
+		<table class="table">
 			<div class="col-sm-3">
 				<!-- 전체카테고리 -->
 				<div class="btn-group-vertical">
@@ -167,7 +169,7 @@
 						<tr>
 							<td><%=n.getNoticeId()%></td>
 							<td>
-								<a href="<%=request.getContextPath()%>/notice/noticeOne.jsp"><%=n.getNoticeTitle()%></a>
+								<a href="<%=request.getContextPath()%>/notice/noticeOne.jsp?noticeId=<%=n.getNoticeId()%>"><%=n.getNoticeTitle()%></a>
 							</td>
 						</tr>
 				<%

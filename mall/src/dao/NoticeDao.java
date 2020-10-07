@@ -26,7 +26,7 @@ public class NoticeDao {
 		conn.close();
 		return noticelist;
 	}
-	// 메인 페이지에서 최근 공지 2개를 출력하는 메소드
+	// 메인 페이지에서 최근 공지 3개를 출력하는 메소드
 	public ArrayList<Notice> selectMainPageNoticeList() throws Exception{
 		ArrayList<Notice> noticeList = new ArrayList<Notice>();
 		DBUtil dbUtil = new DBUtil();
