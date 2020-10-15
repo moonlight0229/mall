@@ -6,10 +6,24 @@
 <head>
 	<meta charset="UTF-8">
 	<title>member_productOne</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script>
+		// 유효성 검사
+		$(document).ready(function(){
+			$("#btn").click(function(){
+				if($("#ordersAddr").val().length<1){
+					alert("배송지를 입력하세요");
+					$("#ordersAddr").focus(); // 입력 포커스를 ordersAddr 입력창으로
+					return;
+				}
+				$("#addOdersForm").submit();
+			});
+		});
+	</script>
 </head>
 <body>
 <%	
@@ -48,7 +62,7 @@
 		</tr>
 	</table>
 	
-	<form method="post" action="<%=request.getContextPath()%>/orders/addOrdersAction.jsp">
+	<form method="post" action="<%=request.getContextPath()%>/orders/addOrdersAction.jsp" id="addOdersForm">
 		<input type="hidden" value="<%=product.getProductId()%>" name="productId">
 		<input type="hidden" value="<%=product.getProductPrice()%>" name="productPrice">
 		<div>
@@ -65,9 +79,9 @@
 		</div>
 		<div>
 			배송지 : 
-			<input type="text" name="ordersAddr">
+			<input type="text" name="ordersAddr" id="ordersAddr">
 		</div>
-		<div><button type="submit" class="btn btn-sucess">주문</button></div>
+		<div><button type="button" id="btn" class="btn btn-sucess">주문</button></div>
 	</form>
 </div>
 </body>

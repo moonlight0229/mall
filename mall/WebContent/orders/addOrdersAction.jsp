@@ -23,5 +23,5 @@
 	
 	OrdersDao ordersDao = new OrdersDao();
 	ordersDao.insertOrders(orders);
-	response.sendRedirect(request.getContextPath()+"/orders/myOrdersList.jsp");
+	response.sendRedirect(request.getContextPath()+"/member/myMember.jsp?memberEmail="+session.getAttribute("loginMemberEmail"));
 %>
