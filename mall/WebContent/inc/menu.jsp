@@ -32,10 +32,10 @@
 				%>
 						<!-- 로그아웃 상태 -->
 						<div>
-							<a class="btn btn-light" href="<%=request.getContextPath()%>/member/login.jsp">
+							<a class="btn btn-success" href="<%=request.getContextPath()%>/member/login.jsp">
 								로그인
 							</a>
-							<a class="btn btn-light" href="<%=request.getContextPath()%>/member/signup.jsp">
+							<a class="btn btn-primary" href="<%=request.getContextPath()%>/member/signup.jsp">
 								회원가입
 							</a>
 						</div>
@@ -44,10 +44,10 @@
 				%>
 						<!-- 로그인 상태 -->
 						<div>
-							<a class="btn btn-light btn-sm" href="<%=request.getContextPath()%>/member/myMember.jsp?memberEmail=<%=session.getAttribute("loginMemberEmail")%>">
+							<a class="btn btn-light" href="<%=request.getContextPath()%>/member/myMember.jsp?memberEmail=<%=session.getAttribute("loginMemberEmail")%>">
 								<%=session.getAttribute("loginMemberEmail")%>님
 							</a>
-							<a class="btn btn-danger btn-sm" href="<%=request.getContextPath()%>/member/logoutAction.jsp">
+							<a class="btn btn-danger" href="<%=request.getContextPath()%>/member/logoutAction.jsp">
 								로그아웃
 							</a>
 						</div>
