@@ -11,7 +11,7 @@ public class NoticeDao {
 		ArrayList<Notice> noticelist = new ArrayList<Notice>();
 		DBUtil dbUtil = new DBUtil();
 		Connection conn = dbUtil.getConnection();
-		String sql = "select notice_id, notice_title, notice_content, notice_date from notice";
+		String sql = "select notice_id, notice_title, notice_content, notice_date from notice order by notice_id desc";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		ResultSet rs = stmt.executeQuery();
 		
@@ -26,6 +26,7 @@ public class NoticeDao {
 		conn.close();
 		return noticelist;
 	}
+	
 	// 메인 페이지에서 최근 공지 3개를 출력하는 메소드
 	public ArrayList<Notice> selectMainPageNoticeList() throws Exception{
 		ArrayList<Notice> noticeList = new ArrayList<Notice>();
